@@ -11,7 +11,7 @@
       padding: 30px;
     }
     h1 {
-      color: #d32f2f; /* أحمر غامق */
+      color: #d32f2f;
       font-size: 32px;
     }
     p {
@@ -19,19 +19,38 @@
       line-height: 1.8;
     }
     .highlight {
-      color: #d32f2f; /* أحمر لبعض الكلمات */
+      color: #d32f2f;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
+
   <h1>إلى أخي وصديقي سليمان</h1>
+
   <p>
     <span class="highlight">مرحبا سليمان،</span><br>
     عيد ميلاد سعيد! صح تأخرت عليك في أني أهنيك في عيد ميلادك،<br>
     لكن اعذرني، <span class="highlight">المهم</span> حبيت أقدم لك رسالة شكر بطريقتي الخاصة أو الغبية <span class="highlight">😂</span><br>
     المهم أنا <span class="highlight">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك <span class="highlight">♥</span>
   </p>
+
+  <p>من أخوك و صديقك/ يـــمـــآن</p>
+
+  <!-- تشغيل الأغنية تلقائياً -->
+  <audio id="myAudio" autoplay>
+    <source src="AADDBB.mp3" type="audio/mpeg">
+    المتصفح لا يدعم تشغيل الصوت.
+  </audio>
+
+  <script>
+    window.onload = function() {
+      var audio = document.getElementById("myAudio");
+      audio.play().catch(function(error) {
+        console.log("التشغيل التلقائي تم منعه: " + error);
+      });
+    };
+  </script>
+
 </body>
 </html>
-<p>من أخوك و صديقك/ يـــمـــآن</p>
