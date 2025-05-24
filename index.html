@@ -22,6 +22,16 @@
       color: #d32f2f;
       font-weight: bold;
     }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -37,20 +47,14 @@
 
   <p>من أخوك و صديقك/ يـــمـــآن</p>
 
-  <!-- تشغيل الأغنية تلقائياً -->
-  <audio id="myAudio" autoplay>
+  <!-- مشغل الصوت -->
+  <audio id="myAudio">
     <source src="AADDBB.mp3" type="audio/mpeg">
     المتصفح لا يدعم تشغيل الصوت.
   </audio>
 
-  <script>
-    window.onload = function() {
-      var audio = document.getElementById("myAudio");
-      audio.play().catch(function(error) {
-        console.log("التشغيل التلقائي تم منعه: " + error);
-      });
-    };
-  </script>
+  <!-- زر تشغيل -->
+  <button onclick="document.getElementById('myAudio').play()">اضغط هنا يا سليمان</button>
 
 </body>
 </html>
