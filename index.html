@@ -5,37 +5,19 @@
   <title>إلى أخي وصديقي سليمان</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Tahoma, sans-serif;
-      color: #fff;
-      text-align: center;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    /* صورة الخلفية كطبقة */
-    body::before {
-      content: "";
       background: url('XXCC.jpg') no-repeat center center fixed;
       background-size: cover;
-      opacity: 0.4; /* الشفافية للصورة */
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .content {
-      padding: 50px 20px;
+      font-family: Tahoma, sans-serif;
+      padding: 30px;
+      text-align: center;
+      color: white;
+      text-shadow: 1px 1px 4px black; /* توهج خفيف للنص */
     }
 
     h1 {
-      color: #ffd700;
-      font-size: 36px;
-      margin-bottom: 20px;
+      color: #b71c1c; /* أحمر غامق */
+      font-size: 32px;
+      text-shadow: 2px 2px 6px black; /* توهج أوضح */
     }
 
     p {
@@ -44,15 +26,15 @@
     }
 
     .highlight {
-      color: #ff5252;
+      color: #d32f2f; /* أحمر مناسب */
       font-weight: bold;
     }
 
     button {
-      margin-top: 30px;
+      margin-top: 20px;
       padding: 12px 24px;
       font-size: 20px;
-      background-color: #ff5252;
+      background-color: #d32f2f;
       color: white;
       border: none;
       border-radius: 12px;
@@ -62,31 +44,40 @@
     }
 
     button:hover {
-      background-color: #e53935;
+      background-color: #b71c1c;
+    }
+
+    /* طبقة شفافة فوق الخلفية */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6); /* شفافية أعلى */
+      z-index: -1;
     }
   </style>
 </head>
 <body>
 
-  <div class="content">
-    <h1>إلى أخي وصديقي سليمان</h1>
+  <h1>إلى أخي وصديقي سليمان</h1>
 
-    <p>
-      <span class="highlight">مرحبا سليمان،</span><br />
-      عيد ميلاد سعيد! صح تأخرت عليك في أني أهنيك في عيد ميلادك،<br />
-      لكن اعذرني، <span class="highlight">المهم</span> حبيت أقدم لك رسالة شكر بطريقتي الخاصة أو الغبية <span class="highlight">😂</span><br />
-      المهم أنا <span class="highlight">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك <span class="highlight">♥</span>
-    </p>
+  <p>
+    <span class="highlight">مرحبا سليمان،</span><br />
+    عيد ميلاد سعيد! صح تأخرت عليك في أني أهنيك في عيد ميلادك،<br />
+    لكن اعذرني، <span class="highlight">المهم</span> حبيت أقدم لك رسالة شكر بطريقتي الخاصة أو الغبية <span class="highlight">😂</span><br />
+    المهم أنا <span class="highlight">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك <span class="highlight">♥</span>
+  </p>
 
-    <p>من أخوك و صديقك/ يـــمـــآن</p>
+  <p>من أخوك و صديقك/ يـــمـــآن</p>
 
-    <audio id="myAudio">
-      <source src="AAGGG.mp3" type="audio/mpeg" />
-      المتصفح لا يدعم تشغيل الصوت.
-    </audio>
+  <audio id="myAudio">
+    <source src="AAGGG.mp3" type="audio/mpeg" />
+    المتصفح لا يدعم تشغيل الصوت.
+  </audio>
 
-    <button onclick="document.getElementById('myAudio').play()">افتح هديتك</button>
-  </div>
+  <button onclick="document.getElementById('myAudio').play()">افتح هديتك</button>
 
 </body>
 </html>
