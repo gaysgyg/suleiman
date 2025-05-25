@@ -1,75 +1,83 @@
-<style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  body {
-    position: relative;
-    font-family: Tahoma, sans-serif;
-    text-align: center;
-    color: white;
-  }
-  .background-image {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('XXCC.jpg') no-repeat center center/cover;
-    opacity: 0.5; /* خفف الشفافية شوي */
-    z-index: -1;
-  }
-  .content {
-    position: relative;
-    z-index: 1;
-    padding: 30px;
-    max-width: 800px; /* عشان النص ما يملأ الصفحة كلها */
-    margin: auto;
-    background-color: rgba(0, 0, 0, 0.3); /* خلفية شفافة للنص */
-    border-radius: 15px;
-  }
-  /* أيقونة الواتس اب داخل المحتوى، أسفل اليمين */
-  .whatsapp-icon-container {
-    position: relative;
-  }
-  .whatsapp-icon {
-    position: absolute;
-    bottom: 10px;  /* 10 بكسل من الأسفل */
-    right: 10px;   /* 10 بكسل من اليمين */
-    width: 60px;   /* حجم أكبر */
-    height: 60px;
-    cursor: pointer;
-    filter: drop-shadow(1px 1px 2px black); /* توضيح الظل */
-    transition: transform 0.3s;
-  }
-  .whatsapp-icon:hover {
-    transform: scale(1.2);
-  }
-  /* النص مع توهج */
-  p, h1, span {
-    text-shadow: 1px 1px 3px black;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إلى أخي وصديقي سليمان</title>
+  <style>
+    body {
+      background: url('XXCC.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Tahoma, sans-serif;
+      padding: 30px;
+      text-align: center;
+      color: white;
+      text-shadow: 1px 1px 4px black; /* توهج خفيف للنص */
+    }
 
-<div class="background-image"></div>
+    h1 {
+      color: #b71c1c; /* أحمر غامق */
+      font-size: 32px;
+      text-shadow: 2px 2px 6px black; /* توهج أوضح */
+    }
 
-<div class="content whatsapp-icon-container">
+    p {
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .highlight {
+      color: #d32f2f; /* أحمر مناسب */
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 20px;
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    /* طبقة شفافة فوق الخلفية */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6); /* شفافية أعلى */
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
   <h1>إلى أخي وصديقي سليمان</h1>
+
   <p>
-    <span style="color: yellow;">مرحباً سليمان،</span><br/>
-    عيد ميلاد سعيد! صح تأخرت عليك في أني أهنيك في عيد ميلادك،<br/>
-    لكن اعذرني، <span style="color: red; font-weight: bold;">المهم</span> حبيت أقدم لك رسالة شكر لهدفك الخاص<br/>
-    أنا المهم <span style="color: red; font-weight: bold;">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك ♥
+    <span class="highlight">مرحبا سليمان،</span><br />
+    عيد ميلاد سعيد! صح تأخرت عليك في أني أهنيك في عيد ميلادك،<br />
+    لكن اعذرني، <span class="highlight">المهم</span> حبيت أقدم لك رسالة شكر بطريقتي الخاصة أو الغبية <span class="highlight">😂</span><br />
+    المهم أنا <span class="highlight">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك <span class="highlight">♥</span>
   </p>
+
   <p>من أخوك و صديقك/ يـــمـــآن</p>
+
   <audio id="myAudio">
     <source src="AAGGG.mp3" type="audio/mpeg" />
-    إصدار لا يدعم تشغيل الصوت.
+    المتصفح لا يدعم تشغيل الصوت.
   </audio>
-  <button onclick="document.getElementById('myAudio').play()">تسجيل هديتك</button>
 
-  <!-- أيقونة الواتس اب -->
-  <a href="https://wa.me/967730219109" target="_blank" rel="noopener noreferrer">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon" />
-  </a>
-</div>
+  <button onclick="document.getElementById('myAudio').play()">افتح هديتك</button>
+
+</body>
+</html>
