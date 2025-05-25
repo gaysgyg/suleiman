@@ -5,31 +5,39 @@
   <title>إلى أخي وصديقي سليمان</title>
   <style>
     body {
-      background: url('XXCC.jpg') no-repeat center center fixed;
+      background-image: url('XXCC.jpg');
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      color: white;
       font-family: Tahoma, sans-serif;
       padding: 30px;
       text-align: center;
-      color: white;
-      text-shadow: 1px 1px 4px black; /* توهج خفيف للنص */
     }
-
+    /* طبقة شفافة فوق الخلفية */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.35); /* تقليل الشفافية قليلاً */
+      z-index: -1;
+    }
     h1 {
-      color: #b71c1c; /* أحمر غامق */
+      color: #f9a825; /* أصفر مناسب */
       font-size: 32px;
-      text-shadow: 2px 2px 6px black; /* توهج أوضح */
+      text-shadow: 1px 1px 4px black;
     }
-
     p {
       font-size: 20px;
       line-height: 1.8;
+      text-shadow: 1px 1px 4px black; /* توهج خفيف للنص */
     }
-
     .highlight {
-      color: #d32f2f; /* أحمر مناسب */
+      color: #d32f2f;
       font-weight: bold;
+      text-shadow: 1px 1px 4px black;
     }
-
     button {
       margin-top: 20px;
       padding: 12px 24px;
@@ -42,20 +50,33 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       transition: background-color 0.3s;
     }
-
     button:hover {
       background-color: #b71c1c;
     }
-
-    /* طبقة شفافة فوق الخلفية */
-    body::before {
-      content: "";
+    /* أيقونة الواتساب */
+    .whatsapp {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6); /* شفافية أعلى */
-      z-index: -1;
+      bottom: 20px;
+      left: 20px;
+      background-color: #25d366;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
+    .whatsapp:hover {
+      background-color: #128c4a;
+    }
+    .whatsapp svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
     }
   </style>
 </head>
@@ -66,18 +87,27 @@
   <p>
     <span class="highlight">مرحبا سليمان،</span><br />
     عيد ميلاد سعيد! صح تأخرت عليك في أني أهنيك في عيد ميلادك،<br />
-    لكن اعذرني، <span class="highlight">المهم</span> حبيت أقدم لك رسالة شكر بطريقتي الخاصة أو الغبية <span class="highlight">😂</span><br />
-    المهم أنا <span class="highlight">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك <span class="highlight">♥</span>
+    لكن اعذرني، <span class="highlight">المهم</span> حبيت أقدم لك رسالة شكر بطريقتي الخاصة أو الغبية<br />
+    المهم أنا <span class="highlight">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك ♥
   </p>
 
   <p>من أخوك و صديقك/ يـــمـــآن</p>
 
+  <!-- مشغل الصوت -->
   <audio id="myAudio">
     <source src="AAGGG.mp3" type="audio/mpeg" />
     المتصفح لا يدعم تشغيل الصوت.
   </audio>
 
+  <!-- زر تشغيل -->
   <button onclick="document.getElementById('myAudio').play()">افتح هديتك</button>
+
+  <!-- أيقونة واتساب -->
+  <a href="https://wa.me/967730219109" target="_blank" class="whatsapp" aria-label="اتصل بي على واتساب">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 3C9.4 3 4 8.4 4 15c0 2.7 1 5.1 2.7 7l-3.2 7 7-3.2c1.8 1 4 1.6 6.5 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.3 17.2c-.3.9-1.6 1.7-2.2 1.8-.6.2-1.2.2-2.1-.3-.9-.5-1.8-1.7-2.1-2.2-.3-.5-.6-.4-1.2-.1-.6.3-2.3.7-4.3-2.7-1.6-2.1-1.6-3.9-1.6-4.2 0-.3.7-1 1-.9.3 0 .6.4.8.6.2.3.3.5.4.7.1.3.2.4.1.7-.1.3-.2.6-.3.9-.1.3-.3.4-.4.6-.1.2-.8 1.5-1.1 2-.3.4 0 .8.2 1.1.2.3.4.8.7 1.2.4.5.7.8 1.1 1.3.5.6 1.1 1 1.7 1.3.6.3 1.1.3 1.5.2.5-.1 1.6-.6 1.8-1.1.2-.5.2-.9.1-1.1-.1-.2-.3-.3-.6-.5z"/>
+    </svg>
+  </a>
 
 </body>
 </html>
