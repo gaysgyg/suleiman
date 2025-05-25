@@ -2,53 +2,6 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>محرر الكود</title>
-  <style>
-    body {
-      font-family: monospace;
-      background-color: #f0f0f0;
-      padding: 20px;
-    }
-    textarea {
-      width: 100%;
-      height: 80vh;
-      font-family: monospace;
-      font-size: 16px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 10px;
-      box-sizing: border-box;
-      white-space: pre;
-      direction: rtl;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #d32f2f;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-  </style>
-</head>
-<body>
-  <h2>محرر صفحة index.html</h2>
-  <textarea id="codeEditor"></textarea>
-  <br />
-  <button onclick="saveFile()">حفظ التغييرات</button>
-
-  <script>
-    // تحميل الكود من ملف index.html عبر fetch (لو تستضيفه على سيرفر)
-    // لكن في محلي (Termux) هذا ما يشتغل، لذا نحتاج طريقة ثانية.
-    // هنا فقط مثال لتعبئة التاكسيتيرا يدوياً:
-    
-    // لو تحط الكود هنا مباشرة:
-    const initialCode = `<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
   <title>إلى أخي وصديقي سليمان</title>
   <style>
     body {
@@ -102,24 +55,12 @@
 
   <!-- مشغل الصوت بدون autoplay -->
   <audio id="myAudio">
-    <source src="ggaaggaa.mp3" type="audio/mpeg" />
+    <source src="AAGGG.mp3" type="audio/mpeg" />
     المتصفح لا يدعم تشغيل الصوت.
   </audio>
 
   <!-- زر تشغيل -->
   <button onclick="document.getElementById('myAudio').play()">افتح هديتك</button>
 
-</body>
-</html>`;
-
-    document.getElementById('codeEditor').value = initialCode;
-
-    function saveFile() {
-      const code = document.getElementById('codeEditor').value;
-      // للأسف في متصفح عادي لا يمكنك كتابة ملف في النظام مباشرة.
-      // تحتاج رفع المحتوى للسيرفر أو نسخ التعديلات يدوياً.
-      alert('لتحفظ التغييرات، انسخ المحتوى وألصقه في ملف index.html في محرر Termux أو جهازك.');
-    }
-  </script>
 </body>
 </html>
