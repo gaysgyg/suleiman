@@ -32,7 +32,8 @@
       font-weight: bold;
     }
 
-    button {
+    /* زر الهدية الأساسي */
+    #playBtn {
       margin-top: 20px;
       padding: 12px 24px;
       font-size: 20px;
@@ -45,47 +46,110 @@
       transition: background-color 0.3s;
       position: relative;
       z-index: 10;
+      overflow: visible;
     }
 
-    button:hover {
+    #playBtn:hover {
       background-color: #b71c1c;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: -1;
-    }
-
-    /* الألوان المتحركة في الأطراف */
+    /* طبقة ألوان الحواف */
     #colorEdges {
       pointer-events: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      border: 2px solid transparent;
+      border: 3px solid transparent;
       box-sizing: border-box;
       border-image-slice: 1;
-      border-image-source: linear-gradient(0deg, red, orange, yellow, green, cyan, blue, violet, red);
-      border-width: 2px;
+      border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
+      border-width: 6px;
       border-radius: 0;
-      animation: colorShift 10s linear infinite;
-      opacity: 0;  /* مخفي بشكل افتراضي */
+      animation: colorShift 5s linear infinite;
+      opacity: 0;
       transition: opacity 0.5s ease;
       z-index: 9;
     }
 
     @keyframes colorShift {
       0% {
-        border-image-source: linear-gradient(0deg, red, orange, yellow, green, cyan, blue, violet, red);
+        border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
       }
       100% {
-        border-image-source: linear-gradient(360deg, red, orange, yellow, green, cyan, blue, violet, red);
+        border-image-source: linear-gradient(630deg, red, orange, yellow, green, blue, indigo, violet, red);
       }
     }
+
+    /* صندوق الهدية بعد الضغط */
+    #giftBox {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 20px auto 0;
+      cursor: default;
+      user-select: none;
+      perspective: 600px;
+      z-index: 15;
+    }
+
+    /* غطاء الصندوق */
+    #giftLid {
+      position: absolute;
+      width: 100%;
+      height: 40%;
+      background: #c1272d;
+      border-radius: 8px 8px 0 0;
+      top: 0;
+      left: 0;
+      transform-origin: bottom center;
+      box-shadow: inset 0 0 10px #800000;
+      transition: transform 1s ease;
+      z-index: 20;
+    }
+
+    /* جسم الصندوق */
+    #giftBody {
+      position: absolute;
+      width: 100%;
+      height: 60%;
+      background: #8b0000;
+      bottom: 0;
+      left: 0;
+      border-radius: 0 0 8px 8px;
+      box-shadow: inset 0 0 15px #4b0000;
+    }
+
+    /* الورد */
+    #rose {
+      position: absolute;
+      bottom: 65px;
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      width: 50px;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+      z-index: 25;
+    }
+
+    /* ظهور الورد */
+    #rose.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* نص الأحرف */
+    #letters {
+      margin-top: 10px;
+      font-size: 24px;
+      color: #f9f871;
+      font-weight: bold;
+      height: 30px;
+      min-height: 30px;
+      letter-spacing: 3px;
+      user-select: none;
+      z-index: 20;
+      overflow: visible;
+    }
+
   </style>
 </head>
 <body>
@@ -106,8 +170,20 @@
     المتصفح لا يدعم تشغيل الصوت.
   </audio>
 
+  <!-- زر الهدية -->
   <button id="playBtn">افتح هديتك</button>
 
+  <!-- صندوق الهدية (مخفي بالبداية) -->
+  <div id="giftBox" style="display:none;">
+    <div id="giftLid"></div>
+    <div id="giftBody"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Rose_icon.svg/1024px-Rose_icon.svg.png" alt="وردة" id="rose" />
+  </div>
+
+  <!-- نص الأحرف -->
+  <div id="letters"></div>
+
+  <!-- حواف الألوان -->
   <div id="colorEdges"></div>
 
   <script>
@@ -115,14 +191,55 @@
     const playBtn = document.getElementById('playBtn');
     const colorEdges = document.getElementById('colorEdges');
 
+    const giftBox = document.getElementById('giftBox');
+    const giftLid = document.getElementById('giftLid');
+    const rose = document.getElementById('rose');
+    const lettersDiv = document.getElementById('letters');
+
+    const message = "عيد ميلاد سعيد يا سليمان";
+
     playBtn.addEventListener('click', () => {
-      audio.play();
+      // إخفاء زر الهدية
+      playBtn.style.display = 'none';
+
+      // إظهار صندوق الهدية
+      giftBox.style.display = 'block';
+
+      // إظهار الحواف الملونة
       colorEdges.style.opacity = '1';
+
+      // تشغيل الصوت
+      audio.play();
+
+      // فتح غطاء الصندوق مع أنيميشن
+      giftLid.style.transform = 'rotateX(-90deg)';
+
+      // بعد انتهاء الأنيميشن (1 ثانية) نخرج الورد والأحرف
+      setTimeout(() => {
+        rose.classList.add('show');
+
+        // عرض الأحرف واحدة واحدة
+        let i = 0;
+        lettersDiv.textContent = "";
+
+        function showNextLetter() {
+          if (i < message.length) {
+            lettersDiv.textContent += message[i];
+            i++;
+            setTimeout(showNextLetter, 200); // سرعة ظهور الأحرف
+          }
+        }
+
+        showNextLetter();
+
+      }, 1000);
     });
 
+    // إذا توقف الصوت نخفي الحواف
     audio.addEventListener('ended', () => {
       colorEdges.style.opacity = '0';
     });
+
   </script>
 
 </body>
