@@ -61,29 +61,44 @@
       z-index: -1;
     }
 
-    /* حدود الألوان المتغيرة */
+    /* الطبقة اللي فيها الألوان المتغيرة عند الأطراف */
     #colorEdges {
       pointer-events: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      border: 3px solid transparent;
-      box-sizing: border-box;
-      border-image-slice: 1;
-      border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
-      border-width: 6px;
+      border: 6px solid;
       border-radius: 0;
-      animation: colorShift 5s linear infinite;
+      animation: colorChange 5s linear infinite;
       opacity: 0;
       transition: opacity 0.5s ease;
       z-index: 9;
+      border-image-slice: 1;
+      border-image-source: none;
+      border-color: red;
     }
 
-    @keyframes colorShift {
+    /* تغيير لون الحدود تدريجياً بدون تحريك */
+    @keyframes colorChange {
       0% {
-        border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
+        border-color: red;
+      }
+      16% {
+        border-color: orange;
+      }
+      33% {
+        border-color: yellow;
+      }
+      50% {
+        border-color: green;
+      }
+      66% {
+        border-color: blue;
+      }
+      83% {
+        border-color: indigo;
       }
       100% {
-        border-image-source: linear-gradient(630deg, red, orange, yellow, green, blue, indigo, violet, red);
+        border-color: violet;
       }
     }
   </style>
@@ -108,6 +123,7 @@
 
   <button id="playBtn">افتح هديتك</button>
 
+  <!-- طبقة الألوان المتغيرة عند الأطراف -->
   <div id="colorEdges"></div>
 
   <script>
@@ -117,9 +133,11 @@
 
     playBtn.addEventListener('click', () => {
       audio.play();
+      // إظهار الألوان عند الأطراف
       colorEdges.style.opacity = '1';
     });
 
+    // اختياري: لو وقف الصوت، نخفي الألوان
     audio.addEventListener('ended', () => {
       colorEdges.style.opacity = '0';
     });
