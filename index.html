@@ -61,7 +61,7 @@
       z-index: -1;
     }
 
-    /* الطبقة التي تحتوي على الألوان المتغيرة عند الأطراف */
+    /* حدود الألوان المتغيرة */
     #colorEdges {
       pointer-events: none;
       position: fixed;
@@ -73,12 +73,11 @@
       border-width: 6px;
       border-radius: 0;
       animation: colorShift 5s linear infinite;
-      opacity: 0;  /* مخفي بشكل افتراضي */
+      opacity: 0;
       transition: opacity 0.5s ease;
       z-index: 9;
     }
 
-    /* تحريك تغير لون الحدود */
     @keyframes colorShift {
       0% {
         border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
@@ -87,84 +86,6 @@
         border-image-source: linear-gradient(630deg, red, orange, yellow, green, blue, indigo, violet, red);
       }
     }
-
-    /* تأثيرات الصندوق */
-    .gift-box {
-      width: 200px;
-      height: 200px;
-      background-color: red;
-      border-radius: 10px;
-      position: relative;
-      margin: 0 auto;
-      display: none;
-      overflow: hidden;
-    }
-
-    .gift-box .lid {
-      width: 100%;
-      height: 50%;
-      background-color: darkred;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: top 1s;
-    }
-
-    .gift-box .content {
-      width: 100%;
-      height: 100%;
-      background-color: red;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 1s;
-    }
-
-    .gift-box .content .roses {
-      width: 50px;
-      height: 50px;
-      background-color: darkred;
-      border-radius: 50%;
-      margin: 5px;
-    }
-
-    .gift-box .content .letters {
-      position: absolute;
-      bottom: 10px;
-      font-size: 24px;
-      color: white;
-      opacity: 0;
-      transition: opacity 1s;
-    }
-
-    /* تأثيرات الأحرف */
-    @keyframes lettersAnimation {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* تأثيرات الورود */
-    @keyframes rosesAnimation {
-      0% {
-        opacity: 0;
-        transform: scale(0.5);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -187,54 +108,20 @@
 
   <button id="playBtn">افتح هديتك</button>
 
-  <!-- طبقة الألوان المتغيرة عند الأطراف -->
   <div id="colorEdges"></div>
-
-  <!-- صندوق الهدية -->
-  <div class="gift-box" id="giftBox">
-    <div class="lid"></div>
-    <div class="content">
-      <div class="roses"></div>
-      <div class="roses"></div>
-      <div class="roses"></div>
-      <div class="letters">عيد ميلاد سعيد يا سليمان</div>
-    </div>
-  </div>
 
   <script>
     const audio = document.getElementById('myAudio');
     const playBtn = document.getElementById('playBtn');
     const colorEdges = document.getElementById('colorEdges');
-    const giftBox = document.getElementById('giftBox');
-    const lid = giftBox.querySelector('.lid');
-    const content = giftBox.querySelector('.content');
-    const roses = content.querySelectorAll('.roses');
-    const letters = content.querySelector('.letters');
 
     playBtn.addEventListener('click', () => {
       audio.play();
-      // إظهار الألوان عند الأطراف
       colorEdges.style.opacity = '1';
-      // إظهار صندوق الهدية
-      giftBox.style.display = 'block';
-      // فتح الغطاء
-      lid.style.top = '-50%';
-      // إظهار الورود
-      roses.forEach((rose, index) => {
-        setTimeout(() => {
-          rose.style.animation = 'rosesAnimation 1s forwards';
-        }, index * 300);
-      });
-      // إظهار الأحرف
-      setTimeout(() => {
-        letters.style.animation = 'lettersAnimation 1s forwards';
-      }, roses.length * 300);
     });
 
-    // اختياري: لو وقف الصوت، نخفي الألوان
     audio.addEventListener('ended', () => {
       colorEdges.style.opacity = '0';
-      giftBox.style.display = 'none';
     });
   </script>
 
