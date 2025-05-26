@@ -1,147 +1,49 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <title>إلى أخي وصديقي سليمان</title>
+  <meta name="google-site-verification" content="fPPHXmsQObj8H3pKa0DF2BTopLsclih6IH6itIn9uas" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>هديتك هنا</title>
   <style>
     body {
-      background: url('XXCC.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: Tahoma, sans-serif;
-      padding: 30px;
+      background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
+      background-size: 800% 800%;
+      animation: gradientBG 20s ease infinite;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
       text-align: center;
       color: white;
-      text-shadow: 1px 1px 4px black;
-      position: relative;
-      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      margin-top: 100px;
     }
 
     h1 {
-      color: #b71c1c;
-      font-size: 32px;
-      text-shadow: 2px 2px 6px black;
+      font-size: 3em;
     }
 
-    p {
-      font-size: 20px;
-      line-height: 1.8;
-    }
-
-    .highlight {
-      color: #d32f2f;
-      font-weight: bold;
-    }
-
-    button {
+    audio {
       margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 20px;
-      background-color: #d32f2f;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: background-color 0.3s;
-      position: relative;
-      z-index: 10;
-    }
-
-    button:hover {
-      background-color: #b71c1c;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: -1;
-    }
-
-    /* الطبقة اللي فيها الألوان المتغيرة عند الأطراف */
-    #colorEdges {
-      pointer-events: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border: 6px solid;
-      border-radius: 0;
-      animation: colorChange 5s linear infinite;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 9;
-      border-image-slice: 1;
-      border-image-source: none;
-      border-color: red;
-    }
-
-    /* تغيير لون الحدود تدريجياً بدون تحريك */
-    @keyframes colorChange {
-      0% {
-        border-color: red;
-      }
-      16% {
-        border-color: orange;
-      }
-      33% {
-        border-color: yellow;
-      }
-      50% {
-        border-color: green;
-      }
-      66% {
-        border-color: blue;
-      }
-      83% {
-        border-color: indigo;
-      }
-      100% {
-        border-color: violet;
-      }
     }
   </style>
 </head>
 <body>
-
-  <h1>إلى أخي وصديقي سليمان</h1>
-
-  <p>
-    <span class="highlight">مرحبا سليمان،</span><br />
-    عيد ميلاد سعيد! صح تأخرت عليك في أني أهنيك في عيد ميلادك،<br />
-    لكن اعذرني، <span class="highlight">المهم</span> حبيت أقدم لك رسالة شكر بطريقتي الخاصة أو الغبية <span class="highlight">😂</span><br />
-    المهم أنا <span class="highlight">أشكرك</span> وأشكر الله أن لي صديق وأخ مثلك <span class="highlight">♥</span>
-  </p>
-
-  <p>من أخوك و صديقك/ يـــمـــآن</p>
-
-  <audio id="myAudio" loop>
-    <source src="AAGGG.mp3" type="audio/mpeg" />
-    المتصفح لا يدعم تشغيل الصوت.
-  </audio>
-
-  <button id="playBtn">افتح هديتك</button>
-
-  <!-- طبقة الألوان المتغيرة عند الأطراف -->
-  <div id="colorEdges"></div>
-
-  <script>
-    const audio = document.getElementById('myAudio');
-    const playBtn = document.getElementById('playBtn');
-    const colorEdges = document.getElementById('colorEdges');
-
-    playBtn.addEventListener('click', () => {
-      audio.play();
-      // إظهار الألوان عند الأطراف
-      colorEdges.style.opacity = '1';
-    });
-
-    // اختياري: لو وقف الصوت، نخفي الألوان
-    audio.addEventListener('ended', () => {
-      colorEdges.style.opacity = '0';
-    });
-  </script>
-
+  <div class="container">
+    <h1>عيد ميلاد سعيد يا سليمان</h1>
+    <p>افتح هديتك هنا</p>
+    <audio controls>
+      <source src="happy.mp3" type="audio/mpeg" />
+      متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+  </div>
 </body>
 </html>
