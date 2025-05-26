@@ -32,8 +32,7 @@
       font-weight: bold;
     }
 
-    /* زر الهدية الأساسي */
-    #playBtn {
+    button {
       margin-top: 20px;
       padding: 12px 24px;
       font-size: 20px;
@@ -46,14 +45,23 @@
       transition: background-color 0.3s;
       position: relative;
       z-index: 10;
-      overflow: visible;
     }
 
-    #playBtn:hover {
+    button:hover {
       background-color: #b71c1c;
     }
 
-    /* طبقة ألوان الحواف */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: -1;
+    }
+
+    /* الطبقة التي تحتوي على الألوان المتغيرة عند الأطراف */
     #colorEdges {
       pointer-events: none;
       position: fixed;
@@ -65,11 +73,12 @@
       border-width: 6px;
       border-radius: 0;
       animation: colorShift 5s linear infinite;
-      opacity: 0;
+      opacity: 0;  /* مخفي بشكل افتراضي */
       transition: opacity 0.5s ease;
       z-index: 9;
     }
 
+    /* تحريك تغير لون الحدود */
     @keyframes colorShift {
       0% {
         border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
@@ -79,75 +88,81 @@
       }
     }
 
-    /* صندوق الهدية بعد الضغط */
-    #giftBox {
+    /* تأثيرات الصندوق */
+    .gift-box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      border-radius: 10px;
       position: relative;
-      width: 100px;
-      height: 100px;
-      margin: 20px auto 0;
-      cursor: default;
-      user-select: none;
-      perspective: 600px;
-      z-index: 15;
+      margin: 0 auto;
+      display: none;
+      overflow: hidden;
     }
 
-    /* غطاء الصندوق */
-    #giftLid {
-      position: absolute;
+    .gift-box .lid {
       width: 100%;
-      height: 40%;
-      background: #c1272d;
-      border-radius: 8px 8px 0 0;
+      height: 50%;
+      background-color: darkred;
+      position: absolute;
       top: 0;
       left: 0;
-      transform-origin: bottom center;
-      box-shadow: inset 0 0 10px #800000;
-      transition: transform 1s ease;
-      z-index: 20;
+      transition: top 1s;
     }
 
-    /* جسم الصندوق */
-    #giftBody {
-      position: absolute;
+    .gift-box .content {
       width: 100%;
-      height: 60%;
-      background: #8b0000;
-      bottom: 0;
-      left: 0;
-      border-radius: 0 0 8px 8px;
-      box-shadow: inset 0 0 15px #4b0000;
-    }
-
-    /* الورد */
-    #rose {
+      height: 100%;
+      background-color: red;
       position: absolute;
-      bottom: 65px;
-      left: 50%;
-      transform: translateX(-50%) translateY(40px);
-      width: 50px;
+      top: 50%;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       opacity: 0;
-      transition: opacity 1s ease, transform 1s ease;
-      z-index: 25;
+      transition: opacity 1s;
     }
 
-    /* ظهور الورد */
-    #rose.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .gift-box .content .roses {
+      width: 50px;
+      height: 50px;
+      background-color: darkred;
+      border-radius: 50%;
+      margin: 5px;
     }
 
-    /* نص الأحرف */
-    #letters {
-      margin-top: 10px;
+    .gift-box .content .letters {
+      position: absolute;
+      bottom: 10px;
       font-size: 24px;
-      color: #f9f871;
-      font-weight: bold;
-      height: 30px;
-      min-height: 30px;
-      letter-spacing: 3px;
-      user-select: none;
-      z-index: 20;
-      overflow: visible;
+      color: white;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    /* تأثيرات الأحرف */
+    @keyframes lettersAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* تأثيرات الورود */
+    @keyframes rosesAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
   </style>
@@ -170,76 +185,57 @@
     المتصفح لا يدعم تشغيل الصوت.
   </audio>
 
-  <!-- زر الهدية -->
   <button id="playBtn">افتح هديتك</button>
 
-  <!-- صندوق الهدية (مخفي بالبداية) -->
-  <div id="giftBox" style="display:none;">
-    <div id="giftLid"></div>
-    <div id="giftBody"></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Rose_icon.svg/1024px-Rose_icon.svg.png" alt="وردة" id="rose" />
-  </div>
-
-  <!-- نص الأحرف -->
-  <div id="letters"></div>
-
-  <!-- حواف الألوان -->
+  <!-- طبقة الألوان المتغيرة عند الأطراف -->
   <div id="colorEdges"></div>
+
+  <!-- صندوق الهدية -->
+  <div class="gift-box" id="giftBox">
+    <div class="lid"></div>
+    <div class="content">
+      <div class="roses"></div>
+      <div class="roses"></div>
+      <div class="roses"></div>
+      <div class="letters">عيد ميلاد سعيد يا سليمان</div>
+    </div>
+  </div>
 
   <script>
     const audio = document.getElementById('myAudio');
     const playBtn = document.getElementById('playBtn');
     const colorEdges = document.getElementById('colorEdges');
-
     const giftBox = document.getElementById('giftBox');
-    const giftLid = document.getElementById('giftLid');
-    const rose = document.getElementById('rose');
-    const lettersDiv = document.getElementById('letters');
-
-    const message = "عيد ميلاد سعيد يا سليمان";
+    const lid = giftBox.querySelector('.lid');
+    const content = giftBox.querySelector('.content');
+    const roses = content.querySelectorAll('.roses');
+    const letters = content.querySelector('.letters');
 
     playBtn.addEventListener('click', () => {
-      // إخفاء زر الهدية
-      playBtn.style.display = 'none';
-
+      audio.play();
+      // إظهار الألوان عند الأطراف
+      colorEdges.style.opacity = '1';
       // إظهار صندوق الهدية
       giftBox.style.display = 'block';
-
-      // إظهار الحواف الملونة
-      colorEdges.style.opacity = '1';
-
-      // تشغيل الصوت
-      audio.play();
-
-      // فتح غطاء الصندوق مع أنيميشن
-      giftLid.style.transform = 'rotateX(-90deg)';
-
-      // بعد انتهاء الأنيميشن (1 ثانية) نخرج الورد والأحرف
+      // فتح الغطاء
+      lid.style.top = '-50%';
+      // إظهار الورود
+      roses.forEach((rose, index) => {
+        setTimeout(() => {
+          rose.style.animation = 'rosesAnimation 1s forwards';
+        }, index * 300);
+      });
+      // إظهار الأحرف
       setTimeout(() => {
-        rose.classList.add('show');
-
-        // عرض الأحرف واحدة واحدة
-        let i = 0;
-        lettersDiv.textContent = "";
-
-        function showNextLetter() {
-          if (i < message.length) {
-            lettersDiv.textContent += message[i];
-            i++;
-            setTimeout(showNextLetter, 200); // سرعة ظهور الأحرف
-          }
-        }
-
-        showNextLetter();
-
-      }, 1000);
+        letters.style.animation = 'lettersAnimation 1s forwards';
+      }, roses.length * 300);
     });
 
-    // إذا توقف الصوت نخفي الحواف
+    // اختياري: لو وقف الصوت، نخفي الألوان
     audio.addEventListener('ended', () => {
       colorEdges.style.opacity = '0';
+      giftBox.style.display = 'none';
     });
-
   </script>
 
 </body>
