@@ -61,33 +61,40 @@
       z-index: -1;
     }
 
-    /* الطبقة اللي فيها الألوان المتغيرة عند الأطراف */
-    #colorEdges {
-      pointer-events: none;
+    /* خطوط نحيفة على الأطراف */
+    .color-edge {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border: 3px solid transparent;
-      box-sizing: border-box;
-      border-image-slice: 1;
-      border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
-      border-width: 6px;
-      border-radius: 0;
-      animation: colorShift 5s linear infinite;
-      opacity: 0;  /* مخفي بشكل افتراضي */
+      pointer-events: none;
+      opacity: 0;
       transition: opacity 0.5s ease;
       z-index: 9;
     }
 
-    /* تحريك تغير لون الحدود */
-    @keyframes colorShift {
-      0% {
-        border-image-source: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
-      }
-      100% {
-        border-image-source: linear-gradient(630deg, red, orange, yellow, green, blue, indigo, violet, red);
-      }
+    #edge-top, #edge-bottom {
+      left: 0; right: 0;
+      height: 4px; /* نحيف جداً */
     }
 
+    #edge-top {
+      top: 0;
+    }
+
+    #edge-bottom {
+      bottom: 0;
+    }
+
+    #edge-left, #edge-right {
+      top: 0; bottom: 0;
+      width: 4px; /* نحيف جداً */
+    }
+
+    #edge-left {
+      left: 0;
+    }
+
+    #edge-right {
+      right: 0;
+    }
   </style>
 </head>
 <body>
@@ -110,23 +117,58 @@
 
   <button id="playBtn">افتح هديتك</button>
 
-  <!-- طبقة الألوان المتغيرة عند الأطراف -->
-  <div id="colorEdges"></div>
+  <!-- خطوط الأطراف -->
+  <div id="edge-top" class="color-edge"></div>
+  <div id="edge-bottom" class="color-edge"></div>
+  <div id="edge-left" class="color-edge"></div>
+  <div id="edge-right" class="color-edge"></div>
 
   <script>
     const audio = document.getElementById('myAudio');
     const playBtn = document.getElementById('playBtn');
-    const colorEdges = document.getElementById('colorEdges');
+
+    const edges = [
+      document.getElementById('edge-top'),
+      document.getElementById('edge-bottom'),
+      document.getElementById('edge-left'),
+      document.getElementById('edge-right')
+    ];
+
+    let animationInterval;
+
+    function randomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r},${g},${b})`;
+    }
+
+    function startEdgeColors() {
+      edges.forEach(edge => edge.style.opacity = '1');
+
+      animationInterval = setInterval(() => {
+        edges.forEach(edge => {
+          edge.style.backgroundColor = randomColor();
+        });
+      }, 500); // كل نصف ثانية يتغير اللون
+    }
+
+    function stopEdgeColors() {
+      edges.forEach(edge => edge.style.opacity = '0');
+      clearInterval(animationInterval);
+    }
 
     playBtn.addEventListener('click', () => {
       audio.play();
-      // إظهار الألوان عند الأطراف
-      colorEdges.style.opacity = '1';
+      startEdgeColors();
     });
 
-    // اختياري: لو وقف الصوت، نخفي الألوان
+    audio.addEventListener('pause', () => {
+      stopEdgeColors();
+    });
+
     audio.addEventListener('ended', () => {
-      colorEdges.style.opacity = '0';
+      stopEdgeColors();
     });
   </script>
 
